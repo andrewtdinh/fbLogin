@@ -23,7 +23,7 @@ firebaseApp.controller('ExampleController', function($scope, $firebaseAuth, $cor
   var auth = $firebaseAuth(fb);
 
   $scope.login = function(){
-    $cordovaOauth.facebook(process.env.FACEBOOK_APP_ID, ['email']).then(function(result){
+    $cordovaOauth.facebook('442668512567921', ['email']).then(function(result){
       auth.$authWithOAuthToken('facebook', result.access_token).then(function(authData){
         console.log(JSON.stringify(authData));
       }, function(error){
