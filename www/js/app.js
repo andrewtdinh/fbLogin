@@ -27,10 +27,10 @@ firebaseApp.controller('ExampleController', function($scope, $firebaseAuth, $cor
       auth.$authWithOAuthToken('facebook', result.access_token).then(function(authData){
         console.log(JSON.stringify(authData));
       }, function(error){
-        console.error('ERROR: ' + error);
+        console.error('ERROR at the firebaseAuth level: ' + error);
       });
     }, function(error){
-      console.error('ERROR: ' + error);
+      console.error('ERROR at the facebook level: ' + error);
     });
   }
 });
