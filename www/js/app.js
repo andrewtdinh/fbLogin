@@ -22,8 +22,19 @@ firebaseApp.run(function($ionicPlatform) {
 firebaseApp.controller('ExampleController', function($scope, $firebaseAuth, $cordovaOauth){
   var auth = $firebaseAuth(fb);
 
-  $scope.login = function(){
+  $scope.loginFb = function(){
     $cordovaOauth.facebook('442668512567921', ['email']).then(function(result){
+      auth.$authWithOAuthToken('facebook', result.access_token).then(function(authData){
+        console.log(JSON.stringify(authData));
+      }, function(error){
+        console.error('ERROR at the firebaseAuth level: ' + error);
+      });
+    }, function(error){
+      console.error('ERROR at the facebook level: ' + error);
+    });
+  }
+  $scope.loginGp = function(){
+    $cordovaOauth.google('534265459229-jpvjvcbk8vmevna8i8iccrvgmb7tcp4o.apps.googleusercontent.com', ["https://www.googleapis.com/auth/urlshortener", "https://www.googleapis.com/auth/userinfo.email"]).then(function(result){
       auth.$authWithOAuthToken('facebook', result.access_token).then(function(authData){
         console.log(JSON.stringify(authData));
       }, function(error){
