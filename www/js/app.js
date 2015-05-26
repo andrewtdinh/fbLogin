@@ -41,7 +41,7 @@ firebaseApp.controller('ExampleController', function($scope, $firebaseAuth, $cor
         console.error('ERROR at the firebaseAuth level: ' + error);
       });
     }, function(error){
-      console.error('ERROR at the facebook level: ' + error);
+      console.error('ERROR at the google plus level: ' + error);
     });
   }
 });
