@@ -19,29 +19,38 @@ firebaseApp.run(function($ionicPlatform) {
   });
 });
 
-firebaseApp.controller('ExampleController', function($scope, $firebaseAuth, $cordovaOauth){
+firebaseApp.controller('ExampleController', function($scope, $firebaseAuth, $cordovaOauth, $ionicPopup){
   var auth = $firebaseAuth(fb);
+
+  var showAlert = function(titleStr, response){
+    $ionicPopup.alert({
+      title: titleStr,
+      content: response
+    }).then(function(res) {
+      console.log('Test Alert Box');
+    });
+  }
 
   $scope.loginFb = function(){
     $cordovaOauth.facebook('442668512567921', ['email']).then(function(result){
       auth.$authWithOAuthToken('facebook', result.access_token).then(function(authData){
-        console.log(JSON.stringify(authData));
+        showAlert('Successfully login', JSON.stringify(authData));
       }, function(error){
-        console.error('ERROR at the firebaseAuth level: ' + error);
+        showAlert('ERROR at the firebaseAuth level', error);
       });
     }, function(error){
-      console.error('ERROR at the facebook level: ' + error);
+      showAlert('ERROR at the facebook level',  error);
     });
   }
   $scope.loginGp = function(){
     $cordovaOauth.google('534265459229-jpvjvcbk8vmevna8i8iccrvgmb7tcp4o.apps.googleusercontent.com', ["https://www.googleapis.com/auth/urlshortener", "https://www.googleapis.com/auth/userinfo.email"]).then(function(result){
       auth.$authWithOAuthToken('facebook', result.access_token).then(function(authData){
-        console.log(JSON.stringify(authData));
+        showAlert('Successfully login', JSON.stringify(authData));
       }, function(error){
-        console.error('ERROR at the firebaseAuth level: ' + error);
+        showAlert('ERROR at the firebaseAuth level', error);
       });
     }, function(error){
-      console.error('ERROR at the google plus level: ' + error);
+      showAlert('ERROR at the google plus level', error);
     });
   }
 });
