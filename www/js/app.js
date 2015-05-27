@@ -44,7 +44,7 @@ firebaseApp.controller('ExampleController', function($scope, $firebaseAuth, $cor
   }
   $scope.loginGp = function(){
     $cordovaOauth.google('534265459229-jpvjvcbk8vmevna8i8iccrvgmb7tcp4o.apps.googleusercontent.com', ["https://www.googleapis.com/auth/urlshortener", "https://www.googleapis.com/auth/userinfo.email"]).then(function(result){
-      auth.$authWithOAuthToken('facebook', result.access_token).then(function(authData){
+      auth.$authWithOAuthToken  ('google', result.access_token).then(function(authData){
         showAlert('Successfully login', JSON.stringify(authData));
       }, function(error){
         showAlert('ERROR at the firebaseAuth level', error);
